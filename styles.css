@@ -1,0 +1,275 @@
+/* Cores principais */
+:root {
+    --cor-primaria: #4a90e2;
+    /* Azul suave */
+    --cor-secundaria: #50e3c2;
+    /* Verde água */
+    --cor-fundo: #f8f9fa;
+    /* Cinza claro */
+    --cor-texto: #333;
+    /* Cinza escuro */
+    --cor-borda: #e0e0e0;
+    /* Cinza claro para bordas */
+    --cor-botao: #4a90e2;
+    /* Azul suave para botões */
+    --cor-botao-hover: #357abd;
+    /* Azul mais escuro para hover */
+    --cor-botao-excluir: #ff6b6b;
+    /* Vermelho suave para botões de exclusão */
+    --cor-botao-excluir-hover: #ff4c4c;
+    /* Vermelho mais escuro para hover */
+}
+
+/* Reset básico */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: var(--cor-texto);
+}
+
+/* Container principal */
+.container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    color: var(--cor-primaria);
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Layout principal */
+.main-content {
+    display: flex;
+    gap: 25px;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Formulário de campos */
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#campos {
+    max-height: 500px;
+    /* Aumente o limite antes da rolagem */
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.campo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.campo:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.campo input {
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    flex: 1;
+    font-size: 16px;
+}
+
+.campo input::placeholder {
+    color: #999;
+}
+
+.campo button {
+    padding: 10px 15px;
+    background-color: var(--cor-botao-excluir);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.campo button:hover {
+    background-color: var(--cor-botao-excluir-hover);
+}
+
+/* Botão "Novo Campo" */
+#novoCampo {
+    padding: 15px;
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+#novoCampo:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Botões principais */
+.botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#gerarTxt,
+#previewTxt {
+    padding: 15px;
+    background-color: var(--cor-botao);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    text-align: center;
+}
+
+#gerarTxt:disabled,
+#previewTxt:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#gerarTxt:hover:not(:disabled),
+#previewTxt:hover:not(:disabled) {
+    background-color: var(--cor-botao-hover);
+}
+
+/* Aba de preenchimento */
+.aba-preenchimento {
+    width: 350px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aba-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--cor-primaria);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.aba-header .seta {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.aba-content {
+    padding: 15px;
+    background-color: #fff;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+}
+
+#formularioPreenchimento {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#formularioPreenchimento textarea {
+    padding: 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.3s ease;
+}
+
+#formularioPreenchimento textarea:focus {
+    border-color: var(--cor-primaria);
+    outline: none;
+}
+
+/* Pré-visualização */
+#previewContainer {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#previewContainer h2 {
+    color: var(--cor-primaria);
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#previewTxtContent {
+    white-space: pre-wrap;
+    background-color: var(--cor-fundo);
+    padding: 15px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Esconder elementos */
+.hidden {
+    display: none;
+}
+
+/* Transição da seta */
+.aba-content.hidden~.aba-header .seta {
+    transform: rotate(-90deg);
+}
+
+/* Adicione esta regra para destacar o campo selecionado */
+.campo.selecionado {
+    border: 2px solid var(--cor-primaria);
+    background-color: #e6f3ff;
+    /* Fundo azul claro */
+}
