@@ -13,12 +13,14 @@ document.getElementById('novoCampo').addEventListener('click', function () {
     `;
     camposDiv.appendChild(novoCampo);
     atualizarFormularioPreenchimento();
+    verificarTamanhoPreenchido(); // Verifica o tamanho ao adicionar um novo campo
 });
 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('excluirCampo')) {
         event.target.parentElement.remove();
         atualizarFormularioPreenchimento();
+        verificarTamanhoPreenchido(); // Verifica o tamanho ao excluir um campo
     } else if (event.target.closest('.campo')) {
         // Abre a aba ao clicar em qualquer parte do campo
         selecionarCampo(event.target.closest('.campo'));
@@ -46,7 +48,7 @@ function selecionarCampo(campo) {
 
     const formulario = document.getElementById('formularioPreenchimento');
     formulario.innerHTML = `
-        <h3>Preencher ${nome}</h3>
+        <h3>${nome}</h3>
         <textarea placeholder="Digite ou cole os valores para ${nome} (um por linha)"></textarea>
     `;
 
@@ -68,7 +70,36 @@ function atualizarFormularioPreenchimento() {
     const botaoPreview = document.getElementById('previewTxt');
     botaoGerar.disabled = campos.length === 0;
     botaoPreview.disabled = campos.length === 0;
+    verificarTamanhoPreenchido(); // Verifica o tamanho ao atualizar o formulário
 }
+
+function verificarTamanhoPreenchido() {
+    const campos = document.querySelectorAll('.campo');
+    let todosTamanhosPreenchidos = true;
+
+    campos.forEach(campo => {
+        const tamanhoInput = campo.querySelector('.tamanhoCampo');
+
+        if (!tamanhoInput.value) {
+            todosTamanhosPreenchidos = false;
+            tamanhoInput.placeholder = 'Tamanho obrigatório'; // Altera o placeholder
+        } else {
+            tamanhoInput.placeholder = 'Tamanho'; // Restaura o placeholder original
+        }
+    });
+
+    // Habilita ou desabilita os botões com base nas condições
+    const botaoPreview = document.getElementById('previewTxt');
+    const botaoGerar = document.getElementById('gerarTxt');
+    botaoPreview.disabled = campos.length === 0 || !todosTamanhosPreenchidos;
+    botaoGerar.disabled = campos.length === 0 || !todosTamanhosPreenchidos;
+}
+
+document.addEventListener('input', function (event) {
+    if (event.target.classList.contains('tamanhoCampo')) {
+        verificarTamanhoPreenchido();
+    }
+});
 
 document.getElementById('previewTxt').addEventListener('click', function () {
     const previewContent = document.getElementById('previewTxtContent');
@@ -156,4 +187,11 @@ document.getElementById('gerarTxt').addEventListener('click', function () {
         link.download = 'arquivo.txt';
         link.click();
     }
+});
+
+// Desabilitar botões ao carregar a página
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('previewTxt').disabled = true;
+    document.getElementById('gerarTxt').disabled = true;
+    verificarTamanhoPreenchido();
 });
